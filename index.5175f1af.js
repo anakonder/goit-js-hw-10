@@ -1,2 +1,0 @@
-document.querySelector(".cat-info");const e=document.querySelector(".breed-select");document.querySelector(".loader"),document.querySelector(".error");fetch("https://api.thecatapi.com/v1/breeds").then((e=>{if(!e.ok)throw new Error(e.status);return e.json()})).then((o=>function(o){const t=o.map((e=>`<option value="${e.id}">${e.name}</option>`)).join("");e.innerHTML=t}(o))).catch((e=>console.log(e)));
-//# sourceMappingURL=index.5175f1af.js.map
