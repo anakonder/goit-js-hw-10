@@ -46,7 +46,7 @@ function catArray() {
 
 
 function renderBreedsSelect(breeds) {
-  // console.log(breeds)
+ 
   const markup = breeds
     .map((breed) => {
       return `<option value="${breed.id}">${breed.name}</option>`;
