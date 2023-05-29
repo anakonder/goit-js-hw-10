@@ -2,21 +2,8 @@ import { fetchBreeds, fetchCatByBreed } from "./js/cat-api";
 
 const cardBox = document.querySelector(".cat-info");
 const selectList = document.querySelector(".breed-select");
-let catId = selectList.value;
-let resultImg;
-let catRenderingImg;
-
-selectList.addEventListener("change", () => {
-  catId = selectList.value;
-  catImg(catId);
-});
-
-// function renderingImgMarkup(catRenderingImg) {
-//     const markupImg = catRenderingImg
-//         .map((img) => {
-//         return `<img src='${}' alt='${}'/>`
-//     })
-// }
+const loader = document.querySelector(".loader");
+const error = document.querySelector(".error");
 
 function catImg(id) {
   return fetchCatByBreed(id)
