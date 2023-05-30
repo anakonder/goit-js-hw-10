@@ -11,21 +11,23 @@ catArray()
 
 
 selectList.addEventListener("change", () => {
-  catId = selectList.value;
+  const catId = selectList.value;
+  console.log(catId)
   catImg(catId);
-  console.log(catImg)
+  // console.log(catImg)
 });
 
 
 function catImg(id) {
-  return loader.classList.remove('unvisible'),
+  loader.classList.remove('unvisible'),
   fetchCatByBreed(id)
-  .then((information) => {
+    .then((information) => {
+    // console.log(information)
     const resultImg = information
-    const imgObject = resultImg[0]
-    const imgSrc = imgObject.url
-    console.log(imgSrc)
-    renderBreedsCard(imgSrc)
+    const imgObject = resultImg.breeds[0]
+    console.log(resultImg)
+    const imgSrc = resultImg.url
+    renderBreedsCard(imgSrc, imgObject)
     
   })
   .catch((error) => {
@@ -40,12 +42,13 @@ function catImg(id) {
 
 function catArray() {
   
-  return loader.classList.remove('unvisible'),
+   loader.classList.remove('unvisible'),
   
   fetchBreeds()
   
   .then((breeds) => {
     // throw new Error(console.log('ERROR'))
+    console.log(breeds)
     renderBreedsSelect(breeds);
     selectList.classList.remove('unvisible')
   })
@@ -63,7 +66,7 @@ function renderBreedsSelect(breeds) {
  
   const markup = breeds
     .map((breed) => {
-      return `<option value="${breed.id}">${breed.name}</option>`;
+      return `<option value="${breed.reference_image_id}">${breed.name}</option>`;
     })
     .join("");
   selectList.innerHTML = markup;
@@ -71,12 +74,15 @@ function renderBreedsSelect(breeds) {
 }
 
 
-function renderBreedsCard(breedImg) {
+function renderBreedsCard(breedImg, object) {
   return cardBox.innerHTML = `<img
   src=${breedImg}
   alt="cat"
   width="300"
- />`
+ /><div class="text-content">
+   <h2 class="title-breed">${object.name}</h2>
+   <p class="breed-desc">${object.description}</p>
+ </div>`
 }
 
 export { renderBreedsSelect };
