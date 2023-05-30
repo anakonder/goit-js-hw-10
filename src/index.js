@@ -82,6 +82,7 @@ function renderBreedsCard(breedImg, object) {
  /><div class="text-content">
    <h2 class="title-breed">${object.name}</h2>
    <p class="breed-desc">${object.description}</p>
+   <p class="breed-temperament"><b>Temperament</b> ${object.temperament}</p>
  </div>`
 }
 
