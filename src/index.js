@@ -45,7 +45,7 @@ function catArray() {
   fetchBreeds()
   
   .then((breeds) => {
-    throw new Error(console.log('ERROR'))
+    // throw new Error(console.log('ERROR'))
     renderBreedsSelect(breeds);
     selectList.classList.remove('unvisible')
   })
