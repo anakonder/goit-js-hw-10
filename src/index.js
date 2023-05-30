@@ -3,9 +3,12 @@ import { fetchBreeds, fetchCatByBreed } from "./js/cat-api";
 const cardBox = document.querySelector(".cat-info");
 const selectList = document.querySelector(".breed-select");
 const loader = document.querySelector(".loader");
-const error = document.querySelector(".error");
+const errorMessege = document.querySelector(".error");
+
+errorMessege.classList.add('unvisible')
 
 catArray()
+
 
 selectList.addEventListener("change", () => {
   catId = selectList.value;
@@ -16,31 +19,42 @@ selectList.addEventListener("change", () => {
 
 function catImg(id) {
   return loader.classList.remove('unvisible'),
-    fetchCatByBreed(id)
-      .then((information) => {
-        const resultImg = information
-        const imgObject = resultImg[0]
-        const imgSrc = imgObject.url
-        console.log(imgSrc)
-        renderBreedsCard(imgSrc)
-        
-      })
-      .catch((error) => console.log(error))
-      .finally(() => loader.classList.add('unvisible'));
+  fetchCatByBreed(id)
+  .then((information) => {
+    const resultImg = information
+    const imgObject = resultImg[0]
+    const imgSrc = imgObject.url
+    console.log(imgSrc)
+    renderBreedsCard(imgSrc)
+    
+  })
+  .catch((error) => {
+    console.log(error);
+    errorMessege.classList.remove('unvisible');
+    selectList.classList.add('unvisible');
+    
+  })
+  .finally(() => loader.classList.add('unvisible'));
 }
 
 
 function catArray() {
-
+  
   return loader.classList.remove('unvisible'),
   
-    fetchBreeds()
+  fetchBreeds()
+  
+  .then((breeds) => {
+    throw new Error(console.log('ERROR'))
+    renderBreedsSelect(breeds);
+    selectList.classList.remove('unvisible')
+  })
+    .catch((error) => {
+      console.log(error);
+      errorMessege.classList.remove('unvisible');
+      selectList.classList.add('unvisible');
       
-      .then((breeds) => {
-        renderBreedsSelect(breeds);
-        selectList.classList.remove('unvisible')
-      })
-      .catch((error) => console.log(error))
+    })
       .finally(() => loader.classList.add('unvisible'));
 }
 
